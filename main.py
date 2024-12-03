@@ -158,7 +158,7 @@ def loop():
         loop()
 
 # main
-print("Welcome to walletpy!")
+print("Welcome to pywallet!")
 print("This is a free budget tracker made by thebetentacled (check out my github)")
 print("This program is licensed under the terms of the GNU GPLv3 License.")
 loop()
