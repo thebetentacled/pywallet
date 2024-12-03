@@ -99,16 +99,17 @@ def load():
     global walletcash, coins, savings, checking
     # get data
     fields = []
-    rows = [[], [], [], []]
+    rows = []
     data = open("data.csv", "r")
     reader = csv.reader(data)
     fields = next(reader)
     for row in reader:
         rows.append(row)
-    walletcash = float(rows[0][1])
-    coins = float(rows[1][1])
-    savings = float(rows[2][1])
-    checking = float(rows[3][1])
+    # index values for rows list are like this from an assignment issue but it should work just fine.
+    walletcash = float(rows[1][1])
+    coins = float(rows[3][1])
+    savings = float(rows[5][1])
+    checking = float(rows[7][1])
 
 def checkwallet():
     global walletcash, coins, savings, checking
