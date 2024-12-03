@@ -13,14 +13,14 @@ checking = float(0.00)
 # functions
 def reset():
     global walletcash, coins, savings, checking
-    walletcash = float(input("How much money is in your wallet? (bills only!) \n  --> "))
-    coins = float(input("How much money do you have in coins? \n  --> "))
-    savings = float(input("How much money is in your savings? \n  --> "))
-    checking = float(input("How much money is in your checking account? \n  --> "))
+    walletcash = float(input("How much money is in your wallet? (bills only!) (full decimal) \n  --> "))
+    coins = float(input("How much money do you have in coins? (full decimal) \n  --> "))
+    savings = float(input("How much money is in your savings? (full decimal) \n  --> "))
+    checking = float(input("How much money is in your checking account? (full decimal) \n  --> "))
 
 def subtract():
     global walletcash, coins, savings, checking
-    amount = float(input("Subtract how much? \n --> "))
+    amount = float(input("Subtract how much? (full decimal) \n --> "))
     print("Subtract from what? (enter only the number)")
     print("  1) Wallet")
     print("  2) Coins")
@@ -40,7 +40,7 @@ def subtract():
 
 def add():
     global walletcash, coins, savings, checking
-    amount = float(input("Add how much? \n --> "))
+    amount = float(input("Add how much? (full decimal) \n --> "))
     print("Add to what? (enter only the number)")
     print("  1) Wallet")
     print("  2) Coins")
@@ -60,7 +60,7 @@ def add():
 
 def setamount():
     global walletcash, coins, savings, checking
-    amount = float(input("Set balance to what amount? \n --> "))
+    amount = float(input("Set balance to what amount? (full decimal) \n --> "))
     print("Set what? (enter only the number)")
     print("  1) Wallet")
     print("  2) Coins")
@@ -105,10 +105,19 @@ def load():
     fields = next(reader)
     for row in reader:
         rows.append(row)
-    walletcash = rows[1][2]
-    coins = rows[2][2]
-    savings = rows[3][2]
-    checking = rows[4][2]
+    walletcash = float(rows[0][1])
+    coins = float(rows[1][1])
+    savings = float(rows[2][1])
+    checking = float(rows[3][1])
+
+def checkwallet():
+    global walletcash, coins, savings, checking
+    print("In wallet: $", str(walletcash))
+    print("In coins: $", str(coins))
+    print("In savings: $", str(savings))
+    print("In Checking: $", str(checking))
+    total = walletcash + coins + savings + checking
+    print("Total money: $", str(total))
 
 def loop():
     print("What would you like to do?")
@@ -118,6 +127,8 @@ def loop():
     print("  4) Set Amount ")
     print("  5) Save")
     print("  6) Load")
+    print("  7) Check Wallet")
+    print("  8) Quit")
     choice = int(input("  --> "))
     if choice == 1:
         reset()
@@ -137,6 +148,11 @@ def loop():
     elif choice == 6:
         load()
         loop()
+    elif choice == 7:
+        checkwallet()
+        loop()
+    elif choice == 8:
+        exit()
     else:
         loop()
 
